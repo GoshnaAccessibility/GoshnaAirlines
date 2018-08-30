@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -39,6 +40,7 @@ public class MessageActivity extends AppCompatActivity {
 
         @Override
         public void failure(RetrofitError error) {
+            Toast.makeText(mContext, R.string.bad_message, Toast.LENGTH_LONG);
             mSubmit.setEnabled(true);
         }
     };

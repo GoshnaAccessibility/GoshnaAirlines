@@ -2,8 +2,12 @@
     <string name="app_name">GoshnaAirlines</string>
     <string name="action_settings">Settings</string>
 
-    <string name="title_activity_setup">SetupActivity</string>
-    <string name="title_activity_message">MessageActivity</string>
+    <string name="title_activity_setup">Input Flight Info</string>
+    <string name="title_activity_message">Create an Announcement</string>
+
+    <string name="preferences">goshnaairlinesprefs</string>
+    <string name="preferences_gate">gate</string>
+    <string name="preferences_flight_id">flight_id</string>
 
     <string name="submit">SUBMIT</string>
 
@@ -22,7 +26,10 @@
     <string name="speak">SPEAK</string>
     <string name="clear">CLEAR</string>
 
-    <string name="preferences">goshnaairlinesprefs</string>
-    <string name="preferences_gate">gate</string>
-    <string name="preferences_flight_id">flight_id</string>
+    <string name="empty_gate">Please enter a gate number.</string>
+    <string name="empty_dest">Please enter an airport acronym.</string>
+    <string name="empty_flight">Please enter a valid flight number (only numbers).</string>
+    <string name="empty_date">Please enter a valid time.</string>
+    <string name="bad_flight">Could not create flight.</string>
+    <string name="bad_message">Could not post announcement to server.</string>
 </resources>

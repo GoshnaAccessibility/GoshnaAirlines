@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -65,7 +66,7 @@ public class SetupActivity extends AppCompatActivity {
 
         @Override
         public void failure(RetrofitError error) {
-            //
+            Toast.makeText(mContext, R.string.bad_flight, Toast.LENGTH_LONG);
         }
     };
 
@@ -128,14 +129,25 @@ public class SetupActivity extends AppCompatActivity {
 
     public void submit(View v) {
         Airline a = mAirlineChoices.get(mAirline.getSelectedItemPosition());
+
         String g = mGate.getText().toString();
+        if (g.trim().equalsIgnoreCase("")) {
+            String err = mContext.getResources().getString(R.string.empty_gate);
+            mGate.setError(err);
+        }
+
         String d = mDestination.getText().toString();
+        if (d.trim().equalsIgnoreCase("")) {
+            String err = mContext.getResources().getString(R.string.empty_dest);
+            mDestination.setError(err);
+        }
 
         int n = 0;
         try {
             n = Integer.parseInt(mFlightNumber.getText().toString());
         } catch (Exception e) {
-            //
+            String err = mContext.getResources().getString(R.string.empty_flight);
+            mFlightNumber.setError(err);
         }
 
         int t = 0;
@@ -158,7 +170,8 @@ public class SetupActivity extends AppCompatActivity {
 
             t = (int)(then.getTime().getTime() / 1000L);
         } catch (Exception e) {
-            //
+            String err = mContext.getResources().getString(R.string.empty_date);
+            mDeparture.setError(err);
         }
 
         mFlight = new Flight(a.id, d, n, g, t);
