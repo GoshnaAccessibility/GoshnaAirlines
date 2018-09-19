@@ -8,9 +8,11 @@ import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -49,9 +51,17 @@ public class SetupActivity extends AppCompatActivity {
 
     private Flight mFlight;
 
+    private DialogInterface.OnClickListener retryYesListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            GoshnaAirlines.getApi().getAirlines(airlinesCallback);
+        }
+    };
+
     private Callback<AirlineResponse> airlinesCallback = new Callback<AirlineResponse>() {
         @Override
         public void success(AirlineResponse response, Response clientResponse) {
+            mSubmit.setEnabled(true);
             mAirlineChoices = response.airlines;
 
             List<String> airlines = new ArrayList<>();
@@ -66,13 +76,22 @@ public class SetupActivity extends AppCompatActivity {
 
         @Override
         public void failure(RetrofitError error) {
-            Toast.makeText(mContext, R.string.bad_flight, Toast.LENGTH_LONG);
+            mSubmit.setEnabled(false);
+
+            new AlertDialog.Builder(mContext)
+                    .setTitle("Connection Error")
+                    .setMessage("Could not connect to the Goshna airport server.")
+                    .setPositiveButton(R.string.retry, retryYesListener)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
         }
     };
 
     private Callback<FlightIdResponse> flightCallback = new Callback<FlightIdResponse>() {
         @Override
         public void success(FlightIdResponse response, Response clientResponse) {
+            mSubmit.setEnabled(true);
+
             SharedPreferences.Editor e = GoshnaAirlines.getPreferences().edit();
             e.putString(getString(R.string.preferences_gate), mFlight.gate);
             e.putInt(getString(R.string.preferences_flight_id), response.id);
@@ -81,8 +100,6 @@ public class SetupActivity extends AppCompatActivity {
             mPrevious.setText(mFlight.gate);
             mPrevious.setEnabled(true);
 
-            mSubmit.setEnabled(true);
-
             Intent it = new Intent(mContext, MessageActivity.class);
             startActivity(it);
         }
@@ -90,6 +107,8 @@ public class SetupActivity extends AppCompatActivity {
         @Override
         public void failure(RetrofitError error) {
             mSubmit.setEnabled(true);
+
+            Toast.makeText(mContext, R.string.bad_flight, Toast.LENGTH_LONG);
         }
     };
 
@@ -124,6 +143,7 @@ public class SetupActivity extends AppCompatActivity {
             mPrevious.setEnabled(true);
         }
 
+        mSubmit.setEnabled(false);
         GoshnaAirlines.getApi().getAirlines(airlinesCallback);
     }
 

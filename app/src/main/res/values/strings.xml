@@ -9,6 +9,7 @@
     <string name="preferences_gate">gate</string>
     <string name="preferences_flight_id">flight_id</string>
 
+    <string name="retry">Retry</string>
     <string name="submit">SUBMIT</string>
 
     <string name="airline">Airline:</string>
