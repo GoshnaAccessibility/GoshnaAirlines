@@ -149,17 +149,20 @@ public class SetupActivity extends AppCompatActivity {
 
     public void submit(View v) {
         Airline a = mAirlineChoices.get(mAirline.getSelectedItemPosition());
+        boolean bErr = false; // An error occured
 
         String g = mGate.getText().toString();
         if (g.trim().equalsIgnoreCase("")) {
             String err = mContext.getResources().getString(R.string.empty_gate);
             mGate.setError(err);
+            bErr = true;
         }
 
         String d = mDestination.getText().toString();
         if (d.trim().equalsIgnoreCase("")) {
             String err = mContext.getResources().getString(R.string.empty_dest);
             mDestination.setError(err);
+            bErr = true;
         }
 
         int n = 0;
@@ -168,6 +171,7 @@ public class SetupActivity extends AppCompatActivity {
         } catch (Exception e) {
             String err = mContext.getResources().getString(R.string.empty_flight);
             mFlightNumber.setError(err);
+            bErr = true;
         }
 
         int t = 0;
@@ -192,12 +196,14 @@ public class SetupActivity extends AppCompatActivity {
         } catch (Exception e) {
             String err = mContext.getResources().getString(R.string.empty_date);
             mDeparture.setError(err);
+            bErr = true;
         }
 
-        mFlight = new Flight(a.id, d, n, g, t);
-        GoshnaAirlines.getApi().addFlight(mFlight, flightCallback);
-
-        mSubmit.setEnabled(false);
+        if(!bErr) {
+            mFlight = new Flight(a.id, d, n, g, t);
+            mSubmit.setEnabled(false);
+            GoshnaAirlines.getApi().addFlight(mFlight, flightCallback);
+        }
     }
 
     public void previous(View v) {
