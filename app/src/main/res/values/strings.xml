@@ -32,5 +32,8 @@
     <string name="empty_flight">Please enter a valid flight number (only numbers).</string>
     <string name="empty_date">Please enter a valid time.</string>
     <string name="bad_flight">Could not create flight.</string>
+
+
+    <string name="message_submitted">Message sent</string>
     <string name="bad_message">Could not post announcement to server.</string>
 </resources>

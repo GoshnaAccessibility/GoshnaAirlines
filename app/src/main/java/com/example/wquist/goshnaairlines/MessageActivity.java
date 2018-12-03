@@ -35,12 +35,13 @@ public class MessageActivity extends AppCompatActivity {
         @Override
         public void success(MessageIdResponse response, Response clientResponse) {
             clear(null);
+            Toast.makeText(mContext, R.string.message_submitted, Toast.LENGTH_SHORT).show();
             mSubmit.setEnabled(true);
         }
 
         @Override
         public void failure(RetrofitError error) {
-            Toast.makeText(mContext, R.string.bad_message, Toast.LENGTH_LONG);
+            Toast.makeText(mContext, R.string.bad_message, Toast.LENGTH_LONG).show();
             mSubmit.setEnabled(true);
         }
     };
@@ -75,9 +76,9 @@ public class MessageActivity extends AppCompatActivity {
         int flight_id = GoshnaAirlines.getPreferences().getInt(getString(R.string.preferences_flight_id), 0);
         Message m = new Message(mMessage.getText().toString());
 
-        GoshnaAirlines.getApi().createMessage(flight_id, m, messageCallback);
-
         mSubmit.setEnabled(false);
+
+        GoshnaAirlines.getApi().createMessage(flight_id, m, messageCallback);
     }
 
     @Override
