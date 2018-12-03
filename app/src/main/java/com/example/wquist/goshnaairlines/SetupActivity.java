@@ -108,7 +108,7 @@ public class SetupActivity extends AppCompatActivity {
         public void failure(RetrofitError error) {
             mSubmit.setEnabled(true);
 
-            Toast.makeText(mContext, R.string.bad_flight, Toast.LENGTH_LONG);
+            Toast.makeText(mContext, R.string.bad_flight, Toast.LENGTH_LONG).show();
         }
     };
 
