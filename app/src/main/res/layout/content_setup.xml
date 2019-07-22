@@ -57,7 +57,7 @@
                 android:layout_marginStart="@dimen/default_margin"
                 android:layout_marginTop="@dimen/default_margin"
                 android:ems="10"
-                android:inputType="textCapCharacters"
+                android:inputType="textVisiblePassword"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/barrier"
