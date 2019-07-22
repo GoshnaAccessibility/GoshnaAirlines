@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 import retrofit.RestAdapter;
 
 public class GoshnaAirlines extends Application {
-    public static final String API_ADDRESS = "http://scc-dh-testbed.lancs.ac.uk:5000";//"http://10.0.2.2:5000";
+    public static final String API_ADDRESS = "https://scc-dh-testbed.lancs.ac.uk";//"http://10.0.2.2:5000";
     public static final String API_URL = "/goshna/api";
 
     private static Context mContext;
