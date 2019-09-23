@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -135,7 +136,7 @@ public class SetupActivity extends AppCompatActivity {
         mPrevious = findViewById(R.id.previous);
 
         String gate = GoshnaAirlines.getPreferences().getString(getString(R.string.preferences_gate), "");
-        if (gate == "") {
+        if (gate.equals("")) {
             mPrevious.setText(getString(R.string.no_gate));
             mPrevious.setEnabled(false);
         } else {
@@ -176,7 +177,7 @@ public class SetupActivity extends AppCompatActivity {
 
         int t = 0;
         try {
-            DateFormat fmt = new SimpleDateFormat("HH:mm");
+            DateFormat fmt = new SimpleDateFormat("HH:mm", Locale.getDefault());
             Date time = fmt.parse(mDeparture.getText().toString());
 
             Calendar then = Calendar.getInstance();

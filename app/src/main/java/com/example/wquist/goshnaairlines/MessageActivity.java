@@ -83,14 +83,14 @@ public class MessageActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int request, int result, Intent data) {
+        super.onActivityResult(request, result, data);
         switch (request) {
             case STT_REQUEST:
                 if (result != RESULT_OK)
                     return;
 
                 ArrayList<String> text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                if (text.size() == 0)
-                    return;
+                if (text == null || text.size() == 0) return;
 
                 mMessage.setText(text.get(0));
                 break;
