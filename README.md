@@ -1,6 +1,6 @@
 # Goshna Airlines - Android App
 
-[![Build Status](https://travis-ci.com/GoshnaAccessibility/GoshnaAirlines.svg?branch=master)](https://travis-ci.com/GoshnaAccessibility/GoshnaAirlines)
+[![CI](https://github.com/GoshnaAccessibility/GoshnaAirlines/workflows/CI/badge.svg)](https://github.com/GoshnaAccessibility/GoshnaAirlines/actions?query=workflow%3A%22CI%22)
 [![Maintainability](https://api.codeclimate.com/v1/badges/683283212c07868bdce5/maintainability)](https://codeclimate.com/github/GoshnaAccessibility/GoshnaAirlines/maintainability)
 
 Android app for airport staff making gate announcements. Spoken announcements are converted to text, then pushed to registered mobile phones.
